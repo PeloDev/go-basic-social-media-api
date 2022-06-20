@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/PeloDev/go-server-template/authentication"
 	"github.com/PeloDev/go-server-template/homepage"
 	"github.com/PeloDev/go-server-template/server"
 )
@@ -24,11 +25,13 @@ func main() {
 	logger := log.New(os.Stdout, "goServerT ", log.LstdFlags|log.Lshortfile)
 
 	// define features with logger
+	auth := authentication.NewHandlers(logger)
 	h := homepage.NewHandlers(logger)
 
 	mux := http.NewServeMux()
 
 	// feature routes
+	auth.SetupRoutes(mux)
 	h.SetupRoutes(mux)
 
 	srv := server.New(mux, ServiceAddr)

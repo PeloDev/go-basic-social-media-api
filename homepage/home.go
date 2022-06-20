@@ -30,7 +30,7 @@ func (h *Handlers) Logger(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 func (h *Handlers) SetupRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/", h.Logger(h.Home))
+	mux.HandleFunc("/home/", h.Logger(h.Home))
 }
 
 func NewHandlers(logger *log.Logger) *Handlers {
